@@ -49,23 +49,23 @@ class HAMLYN_dataset(DatasetVSLAMLab):
 
     def create_rgb_folder(self, sequence_name):
         sequence_path = os.path.join(self.dataset_path, sequence_name)
-        rgb_path = os.path.join(sequence_path, 'rgb')
+        rgb_0_path = os.path.join(sequence_path, 'rgb_0')
         image01_path = os.path.join(sequence_path, 'image01')
         if os.path.exists(image01_path):
-            os.rename(image01_path, rgb_path)
+            os.rename(image01_path, rgb_0_path)
 
-    def create_rgb_txt(self, sequence_name):
+    def create_rgb_csv(self, sequence_name):
         sequence_path = os.path.join(self.dataset_path, sequence_name)
-        rgb_path = os.path.join(sequence_path, 'rgb')
-        rgb_txt = os.path.join(sequence_path, 'rgb.txt')
+        rgb_0_path = os.path.join(sequence_path, 'rgb_0')
+        rgb_csv = os.path.join(sequence_path, 'rgb.csv')
 
-        rgb_files = [f for f in os.listdir(rgb_path) if os.path.isfile(os.path.join(rgb_path, f))]
+        rgb_files = [f for f in os.listdir(rgb_0_path) if os.path.isfile(os.path.join(rgb_0_path, f))]
         rgb_files.sort()
-        with open(rgb_txt, 'w') as file:
+        with open(rgb_csv, 'w') as file:
             for iRGB, filename in enumerate(rgb_files, start=0):
                 name, ext = os.path.splitext(filename)
                 ts = float(name) / self.rgb_hz
-                file.write(f"{ts:.5f} rgb/{filename}\n")
+                file.write(f"{ts:.5f} rgb_0/{filename}\n")
 
     def create_calibration_yaml(self, sequence_name):
         sequence_path = os.path.join(self.dataset_path, sequence_name)
@@ -75,8 +75,8 @@ class HAMLYN_dataset(DatasetVSLAMLab):
 
         fx, _, cx, _ = map(float, lines[0].split())
         _, fy, cy, _ = map(float, lines[1].split())
-        camera0 = {"model": "Pinhole", "fx": fx, "fy": fy, "cx": cx, "cy": cy}
 
+        camera0 = {"model": "Pinhole", "fx": fx, "fy": fy, "cx": cx, "cy": cy}
         self.write_calibration_yaml(sequence_name=sequence_name, camera0=camera0)
 
     def create_groundtruth_txt(self, sequence_name):
