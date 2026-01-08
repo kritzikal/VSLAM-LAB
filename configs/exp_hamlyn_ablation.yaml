@@ -34,9 +34,9 @@ exp_droidslam_baseline:
 
 
 
-# Baseline: DPVO without constraints
+# Baseline: ORB-SLAM3 without constraints
 
-exp_dpvo_baseline:
+exp_orbslam3_baseline:
 
   Config: config_hamlyn_endoscopy.yaml
 
@@ -44,7 +44,7 @@ exp_dpvo_baseline:
 
   Parameters: {verbose: 1}
 
-  Module: dpvo
+  Module: orbslam3
 
 
 
@@ -146,9 +146,9 @@ exp_droidslam_strict:
 
 
 
-# DPVO with default kinematic constraints
+# ORB-SLAM3 with default kinematic constraints
 
-exp_dpvo_constrained:
+exp_orbslam3_constrained:
 
   Config: config_hamlyn_endoscopy.yaml
 
@@ -168,4 +168,4 @@ exp_dpvo_constrained:
 
   }
 
-  Module: dpvo
+  Module: orbslam3
