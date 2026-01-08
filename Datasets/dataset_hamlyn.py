@@ -55,17 +55,21 @@ class HAMLYN_dataset(DatasetVSLAMLab):
             os.rename(image01_path, rgb_0_path)
 
     def create_rgb_csv(self, sequence_name):
+        import csv
         sequence_path = os.path.join(self.dataset_path, sequence_name)
         rgb_0_path = os.path.join(sequence_path, 'rgb_0')
         rgb_csv = os.path.join(sequence_path, 'rgb.csv')
 
         rgb_files = [f for f in os.listdir(rgb_0_path) if os.path.isfile(os.path.join(rgb_0_path, f))]
         rgb_files.sort()
-        with open(rgb_csv, 'w') as file:
+
+        with open(rgb_csv, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['ts_rgb0 (s)', 'path_rgb0'])  # Header
             for iRGB, filename in enumerate(rgb_files, start=0):
                 name, ext = os.path.splitext(filename)
                 ts = float(name) / self.rgb_hz
-                file.write(f"{ts:.5f} rgb_0/{filename}\n")
+                writer.writerow([f"{ts:.5f}", f"rgb_0/{filename}"])
 
     def create_calibration_yaml(self, sequence_name):
         sequence_path = os.path.join(self.dataset_path, sequence_name)
