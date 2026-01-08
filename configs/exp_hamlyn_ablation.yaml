@@ -28,7 +28,7 @@ exp_droidslam_baseline:
 
   NumRuns: 3
 
-  Parameters: {verbose: 1}
+  Parameters: {verbose: 1, mode:'mono'}
 
   Module: droidslam
 
@@ -36,15 +36,15 @@ exp_droidslam_baseline:
 
 # Baseline: ORB-SLAM3 without constraints
 
-exp_orbslam3_baseline:
+#exp_orbslam3_baseline:
 
-  Config: config_hamlyn_endoscopy.yaml
+  #Config: config_hamlyn_endoscopy.yaml
 
-  NumRuns: 3
+  #NumRuns: 3
 
-  Parameters: {verbose: 1}
+  #Parameters: {verbose: 1, mode:'mono'}
 
-  Module: orbslam3
+  #Module: orbslam3
 
 
 
@@ -59,6 +59,8 @@ exp_droidslam_no_constraints:
   Parameters: {
 
     verbose: 1,
+    
+    mode:'mono',
 
     apply_constraints: false
 
@@ -85,6 +87,8 @@ exp_droidslam_relaxed:
     apply_constraints: true,
 
     save_raw_trajectory: true,
+    
+    mode:'mono', 
 
     refine_iterations: 2
 
@@ -109,6 +113,8 @@ exp_droidslam_default:
     constraint_config: default,
 
     apply_constraints: true,
+    
+    mode:'mono', 
 
     save_raw_trajectory: true,
 
@@ -135,6 +141,8 @@ exp_droidslam_strict:
     constraint_config: strict,
 
     apply_constraints: true,
+    
+    mode:'mono', 
 
     save_raw_trajectory: true,
 
@@ -148,24 +156,26 @@ exp_droidslam_strict:
 
 # ORB-SLAM3 with default kinematic constraints
 
-exp_orbslam3_constrained:
+#exp_orbslam3_constrained:
 
-  Config: config_hamlyn_endoscopy.yaml
+  #Config: config_hamlyn_endoscopy.yaml
 
-  NumRuns: 3
+  #NumRuns: 3
 
-  Parameters: {
+ # Parameters: {
 
-    verbose: 1,
+    #verbose: 1,
 
-    constraint_config: default,
+    #constraint_config: default,
 
-    apply_constraints: true,
+    #apply_constraints: true,
 
-    save_raw_trajectory: true,
+    #save_raw_trajectory: true,
+    
+    #mode:'mono', 
 
-    refine_iterations: 2
+    #refine_iterations: 2
 
-  }
+ # }
 
-  Module: orbslam3
+  #Module: orbslam3
