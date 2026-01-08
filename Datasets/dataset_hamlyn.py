@@ -75,9 +75,9 @@ class HAMLYN_dataset(DatasetVSLAMLab):
 
         fx, _, cx, _ = map(float, lines[0].split())
         _, fy, cy, _ = map(float, lines[1].split())
-        k1, k2, p1, p2, k3 = 0.0, 0.0, 0.0, 0.0, 0.0
+        camera0 = {"model": "Pinhole", "fx": fx, "fy": fy, "cx": cx, "cy": cy}
 
-        self.write_calibration_yaml('OPENCV', fx, fy, cx, cy, k1, k2, p1, p2, k3, sequence_name)
+        self.write_calibration_yaml(sequence_name=sequence_name, camera0=camera0)
 
     def create_groundtruth_txt(self, sequence_name):
         return
