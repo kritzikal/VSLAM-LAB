@@ -14,7 +14,8 @@ from Run.downsample_rgb_frames import downsample_rgb_frames, get_rows
 
 SCRIPT_LABEL = f"\033[95m[{os.path.basename(__file__)}]\033[0m "
 
-#@ray.remote(num_gpus=1)  
+
+# @ray.remote(num_gpus=1)
 def run_sequence(exp_it, exp, baseline, dataset, sequence_name, ablation=False):
     # Check baseline is installed
     baseline.check_installation()
@@ -40,7 +41,8 @@ def run_sequence(exp_it, exp, baseline, dataset, sequence_name, ablation=False):
         exec_command = ablations.prepare_ablation(exp_it, exp, baseline, dataset, sequence_name, exec_command)
 
     # Execute experiment
-    print(f"\n{SCRIPT_LABEL}Running (it {exp_it + 1}/{exp.num_runs}) {baseline.label} in {dataset.dataset_color}{sequence_name}\033[0m of {dataset.dataset_label} ...")
+    print(
+        f"\n{SCRIPT_LABEL}Running (it {exp_it + 1}/{exp.num_runs}) {baseline.label} in {dataset.dataset_color}{sequence_name}\033[0m of {dataset.dataset_label} ...")
     results = baseline.execute(exec_command, exp_it, exp_folder)
 
     # Finish Ablation
@@ -54,7 +56,8 @@ def run_sequence(exp_it, exp, baseline, dataset, sequence_name, ablation=False):
     results['duration_time'] = duration_time
     return results
 
-def create_rgb_exp_csv(exp, dataset, sequence_name, default_parameters = ""):
+
+def create_rgb_exp_csv(exp, dataset, sequence_name, default_parameters=""):
     sequence_path = os.path.join(dataset.dataset_path, sequence_name)
     exp_folder = os.path.join(exp.folder, dataset.dataset_folder, sequence_name)
 
@@ -71,7 +74,7 @@ def create_rgb_exp_csv(exp, dataset, sequence_name, default_parameters = ""):
 
     rgb_idx = 'rgb_idx' in exp.parameters
     max_rgb = 'max_rgb' in exp.parameters or 'max_rgb' in default_parameters and not rgb_idx
-       
+
     if max_rgb or rgb_idx:
         if max_rgb:
             max_rgb_num = exp.parameters['max_rgb'] if 'max_rgb' in exp.parameters else default_parameters['max_rgb']
@@ -81,24 +84,25 @@ def create_rgb_exp_csv(exp, dataset, sequence_name, default_parameters = ""):
         if rgb_idx:
             downsampled_rows = get_rows(
                 list(range(exp.parameters['rgb_idx'][0], exp.parameters['rgb_idx'][1] + 1)), rgb_csv)
-        
+
         with open(rgb_exp_csv, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=list(downsampled_rows[0].keys()))
             writer.writeheader()
             writer.writerows(downsampled_rows)
 
+
 def get_sequence_data_for_evaluation(exp: Any, dataset: Any, sequence_name: str) -> None:
-    sequence_path = dataset.dataset_path /  sequence_name
+    sequence_path = dataset.dataset_path / sequence_name
     exp_folder = Path(exp.folder) / Path(dataset.dataset_folder) / sequence_name
     groundtruth_csv = sequence_path / 'groundtruth.csv'
-    groundtruth_csv_dst = exp_folder / 'groundtruth.csv' 
-    if not groundtruth_csv_dst.exists():
+    groundtruth_csv_dst = exp_folder / 'groundtruth.csv'
+    if groundtruth_csv.exists() and not groundtruth_csv_dst.exists():
         shutil.copy(groundtruth_csv, groundtruth_csv_dst)
 
     rgb_folder = sequence_path / "rgb_0"
     first_image = next(rgb_folder.iterdir())
-    thumbnails_folder =  VSLAMLAB_EVALUATION / "thumbnails"
-    rgb_thumbnail = thumbnails_folder/ f"rgb_thumbnail_{dataset.dataset_name}_{sequence_name}{first_image.suffix}"
+    thumbnails_folder = VSLAMLAB_EVALUATION / "thumbnails"
+    rgb_thumbnail = thumbnails_folder / f"rgb_thumbnail_{dataset.dataset_name}_{sequence_name}{first_image.suffix}"
     thumbnails_folder.mkdir(parents=True, exist_ok=True)
     if not rgb_thumbnail.exists():
         shutil.copy(first_image, rgb_thumbnail)
