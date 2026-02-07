@@ -1,7 +1,5 @@
 import os.path
 
-from huggingface_hub import hf_hub_download
-
 from utilities import print_msg
 from path_constants import VSLAMLAB_BASELINES
 from Baselines.BaselineVSLAMLab import BaselineVSLAMLab
@@ -15,6 +13,10 @@ class SAGESLAM_baseline(BaselineVSLAMLab):
     SAGE-SLAM combines learning-based appearance priors with optimizable geometry
     priors and factor graph optimization for monocular endoscopic SLAM.  It
     simultaneously tracks the endoscope and reconstructs dense 3D geometry.
+
+    Pretrained weights are bundled with the SAGE-SLAM repository itself
+    (in the pretrained/ and representation/ directories), so no separate
+    download step is needed after git clone.
 
     Reference:
         Liu et al., "SAGE-SLAM: SLAM with Appearance and Geometry Prior for
@@ -40,34 +42,32 @@ class SAGESLAM_baseline(BaselineVSLAMLab):
 
     def git_clone(self):
         super().git_clone()
-        self.sageslam_download_weights()
+        self._check_weights()
 
     def is_installed(self):
         return (True, 'is installed') if self.is_cloned() else (False, 'not installed (auto install available)')
 
-    def sageslam_download_weights(self):
-        """Download pre-trained model weights for SAGE-SLAM."""
+    def _check_weights(self):
+        """Verify that pretrained weights exist after cloning.
+
+        SAGE-SLAM ships weights inside the repo (pretrained/ and representation/
+        directories).  This method checks they are present and warns if not.
+        """
         pretrained_dir = os.path.join(self.baseline_path, 'pretrained')
-        os.makedirs(pretrained_dir, exist_ok=True)
+        representation_dir = os.path.join(self.baseline_path, 'representation')
 
-        files = [
-            os.path.join(pretrained_dir, "sage_slam_model.pth"),
-        ]
+        has_pretrained = os.path.isdir(pretrained_dir) and len(os.listdir(pretrained_dir)) > 0
+        has_representation = os.path.isdir(representation_dir) and len(os.listdir(representation_dir)) > 0
 
-        for file in files:
-            file_name = os.path.basename(file)
-            if not os.path.exists(file):
-                print_msg(f"\n{SCRIPT_LABEL}", f"Download weights: {file}", 'info')
-                try:
-                    _ = hf_hub_download(
-                        repo_id='vslamlab/sageslam_weights',
-                        filename=file_name,
-                        repo_type='model',
-                        local_dir=pretrained_dir
-                    )
-                except Exception as e:
-                    print_msg(f"\n{SCRIPT_LABEL}",
-                              f"Could not download weights (may need manual setup): {e}", 'warning')
+        if has_pretrained:
+            print_msg(f"{SCRIPT_LABEL}", "Pretrained weights found in repo", 'info')
+        else:
+            print_msg(f"{SCRIPT_LABEL}",
+                      "Pretrained weights NOT found. SAGE-SLAM ships weights "
+                      "inside the repo (pretrained/ directory). If missing, "
+                      "re-clone from https://github.com/lppllppl920/SAGE-SLAM "
+                      "or generate data using DenseReconstruction-Pytorch.",
+                      'warning')
 
 
 class SAGESLAM_baseline_dev(SAGESLAM_baseline):
