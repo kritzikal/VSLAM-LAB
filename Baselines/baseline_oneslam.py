@@ -15,6 +15,10 @@ class ONESLAM_baseline(BaselineVSLAMLab):
     arthroscopy, laparoscopy).  It leverages Tracking Any Point (TAP) foundation
     models for robust sparse correspondence tracking and local bundle adjustment.
 
+    Weights are obtained during install via two scripts:
+      - init_submodules.sh: clones CoTracker + R2D2 submodules (R2D2 ships weights)
+      - get_tap_model.sh:   downloads CoTracker checkpoints from dl.fbaipublicfiles.com
+
     Reference:
         Teufel et al., "OneSLAM to map them all: a generalized approach to SLAM
         for monocular endoscopic imaging based on tracking any point", IPCAI 2024 /
@@ -39,9 +43,39 @@ class ONESLAM_baseline(BaselineVSLAMLab):
 
     def git_clone(self):
         super().git_clone()
+        self._check_weights()
 
     def is_installed(self):
         return (True, 'is installed') if self.is_cloned() else (False, 'not installed (auto install available)')
+
+    def _check_weights(self):
+        """Verify that required model weights exist after clone + install.
+
+        OneSLAM needs two sets of weights:
+          1. CoTracker checkpoints in trained_models/cotracker/
+             (downloaded by get_tap_model.sh from dl.fbaipublicfiles.com)
+          2. R2D2 weights in DBoW/r2d2/models/
+             (bundled with the r2d2 git submodule via init_submodules.sh)
+        """
+        cotracker_dir = os.path.join(self.baseline_path, 'trained_models', 'cotracker')
+        r2d2_weights = os.path.join(self.baseline_path, 'DBoW', 'r2d2', 'models', 'faster2d2_WASF_N16.pt')
+
+        has_cotracker = (os.path.isdir(cotracker_dir)
+                         and any(f.endswith('.pth') for f in os.listdir(cotracker_dir)))
+        has_r2d2 = os.path.isfile(r2d2_weights)
+
+        if has_cotracker and has_r2d2:
+            print_msg(f"{SCRIPT_LABEL}", "CoTracker and R2D2 weights found", 'info')
+        else:
+            missing = []
+            if not has_cotracker:
+                missing.append("CoTracker (run get_tap_model.sh)")
+            if not has_r2d2:
+                missing.append("R2D2 (run init_submodules.sh)")
+            print_msg(f"{SCRIPT_LABEL}",
+                      f"Missing weights: {', '.join(missing)}. "
+                      f"Run: pixi run -e oneslam-dev install",
+                      'warning')
 
 
 class ONESLAM_baseline_dev(ONESLAM_baseline):
@@ -50,5 +84,8 @@ class ONESLAM_baseline_dev(ONESLAM_baseline):
 
     def is_installed(self):
         run_script = os.path.join(self.baseline_path, 'run_slam.py')
-        is_installed = os.path.isfile(run_script)
+        cotracker_dir = os.path.join(self.baseline_path, 'trained_models', 'cotracker')
+        has_weights = (os.path.isdir(cotracker_dir)
+                       and any(f.endswith('.pth') for f in os.listdir(cotracker_dir)))
+        is_installed = os.path.isfile(run_script) and has_weights
         return (True, 'is installed') if is_installed else (False, 'not installed (auto install available)')
