@@ -1,0 +1,26 @@
+# Endoscopy SLAM Benchmarking Dataset Configuration
+#
+# Includes sequences from three endoscopy datasets:
+# - Hamlyn: Laparoscopic/endoscopic rectified stereo sequences
+# - C3VD: Colonoscopy sequences with 6-DoF GT poses and depth
+# - EndoSLAM: GI-tract sequences with 6-DoF GT from robotic arm
+#
+# C3VD and EndoSLAM provide ground truth suitable for ATE/RPE evaluation.
+# Hamlyn provides stereo calibration but limited pose ground truth.
+
+hamlyn:
+  - rectified01
+  - rectified04
+
+c3vd:
+  - cecum_t1_a
+  - cecum_t2_a
+  - desc_t1_a
+  - sigmoid_t1_a
+  - trans_t1_a
+
+endoslam:
+  - Colon_Traj1_HighCam
+  - Colon_Traj2_HighCam
+  - SmallIntestine_Traj1_HighCam
+  - Stomach_Traj1_HighCam

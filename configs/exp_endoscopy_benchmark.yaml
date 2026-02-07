@@ -1,0 +1,41 @@
+# Endoscopy SLAM Benchmarking Experiment Configuration
+#
+# Compares SAGE-SLAM, OneSLAM, and MASt3R-SLAM on endoscopy datasets.
+# Uses datasets with ground truth for quantitative evaluation.
+#
+# Metrics computed by VSLAMLAB:
+#   - ATE (Absolute Trajectory Error) via evo
+#   - Number of tracked frames (robustness)
+#   - Running time (runtime performance)
+#   - Memory usage (GPU/RAM/SWAP)
+#
+# Run with:
+#   pixi run -e vslamlab vslamlab configs/exp_endoscopy_benchmark.yaml
+
+# MASt3R-SLAM baseline (state-of-the-art general SLAM)
+exp_mast3rslam:
+  Config: config_endoscopy.yaml
+  NumRuns: 3
+  Parameters: {verbose: 1, mode: 'mono'}
+  Module: mast3rslam
+
+# DROID-SLAM baseline (established dense visual SLAM)
+exp_droidslam:
+  Config: config_endoscopy.yaml
+  NumRuns: 3
+  Parameters: {verbose: 1, mode: 'mono'}
+  Module: droidslam
+
+# SAGE-SLAM (endoscopy-specialized SLAM, ICRA 2022)
+exp_sageslam:
+  Config: config_endoscopy.yaml
+  NumRuns: 3
+  Parameters: {verbose: 1, mode: 'mono', enable_gui: 'false'}
+  Module: sageslam-dev
+
+# OneSLAM (generalized endoscopy SLAM, IPCAI 2024)
+exp_oneslam:
+  Config: config_endoscopy.yaml
+  NumRuns: 3
+  Parameters: {verbose: 1, mode: 'mono'}
+  Module: oneslam-dev

@@ -1,0 +1,22 @@
+# Endoscopy datasets with ground truth poses only
+# (suitable for quantitative ATE/RPE evaluation)
+
+c3vd:
+  - cecum_t1_a
+  - cecum_t2_a
+  - cecum_t3_a_easy
+  - desc_t1_a
+  - desc_t2_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - trans_t1_a
+  - trans_t2_a
+
+endoslam:
+  - Colon_Traj1_HighCam
+  - Colon_Traj2_HighCam
+  - Colon_Traj3_HighCam
+  - SmallIntestine_Traj1_HighCam
+  - SmallIntestine_Traj2_HighCam
+  - Stomach_Traj1_HighCam
+  - Stomach_Traj2_HighCam

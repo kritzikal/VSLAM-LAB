@@ -1,0 +1,22 @@
+# Endoscopy SLAM Comparison Configuration
+#
+# Enables all comparison metrics relevant for endoscopy SLAM evaluation:
+#   - accuracy_boxplot: ATE RMSE distribution per sequence
+#   - accuracy_boxplot_shared_scale: ATE comparison with uniform Y-axis
+#   - num_tracked_frames: Robustness (frame tracking ratio)
+#   - accuracy_radar: Relative performance across sequences
+#   - trajectories: 2D trajectory visualization
+#   - running_time: Processing time tables (ms/frame, total seconds)
+#   - memory: GPU/RAM/SWAP memory usage tables
+#   - cumulated_error: Cumulative error distribution
+#   - image_canvas: Sample frames from each sequence
+
+accuracy_boxplot: 1
+accuracy_boxplot_shared_scale: 1
+num_tracked_frames: 1
+image_canvas: 1
+accuracy_radar: 1
+trajectories: 1
+cumulated_error: 1
+running_time: 1
+memory: 1
