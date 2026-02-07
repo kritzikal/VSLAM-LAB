@@ -23,6 +23,12 @@ from Baselines.baseline_okvis2 import OKVIS2_baseline
 from Baselines.baseline_okvis2 import OKVIS2_baseline_dev
 from Baselines.baseline_pycuvslam import PYCUVSLAM_baseline
 
+# Endoscopy SLAM baselines
+from Baselines.baseline_sageslam import SAGESLAM_baseline
+from Baselines.baseline_sageslam import SAGESLAM_baseline_dev
+from Baselines.baseline_oneslam import ONESLAM_baseline
+from Baselines.baseline_oneslam import ONESLAM_baseline_dev
+
 def get_baseline_switcher():
     return {
         # ADD your baselines here
@@ -50,6 +56,12 @@ def get_baseline_switcher():
         "okvis2": lambda: OKVIS2_baseline(),
         "okvis2-dev": lambda: OKVIS2_baseline_dev(),
         "pycuvslam": lambda: PYCUVSLAM_baseline(),
+
+        # Endoscopy SLAM baselines
+        "sageslam": lambda: SAGESLAM_baseline(),
+        "sageslam-dev": lambda: SAGESLAM_baseline_dev(),
+        "oneslam": lambda: ONESLAM_baseline(),
+        "oneslam-dev": lambda: ONESLAM_baseline_dev(),
     }
 
 def get_baseline(baseline_name):

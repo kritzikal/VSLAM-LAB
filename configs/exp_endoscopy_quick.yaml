@@ -1,0 +1,29 @@
+# Quick Endoscopy SLAM Benchmark (single run, subset of sequences)
+#
+# Use this for rapid testing before running the full benchmark.
+# Run with:
+#   pixi run -e vslamlab vslamlab configs/exp_endoscopy_quick.yaml
+
+exp_mast3rslam_quick:
+  Config: config_hamlyn_endoscopy.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono', rgb_idx: [0, 200]}
+  Module: mast3rslam
+
+exp_droidslam_quick:
+  Config: config_hamlyn_endoscopy.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono', rgb_idx: [0, 200]}
+  Module: droidslam
+
+exp_sageslam_quick:
+  Config: config_hamlyn_endoscopy.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono', enable_gui: 'false', rgb_idx: [0, 200]}
+  Module: sageslam-dev
+
+exp_oneslam_quick:
+  Config: config_hamlyn_endoscopy.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono', rgb_idx: [0, 200]}
+  Module: oneslam-dev

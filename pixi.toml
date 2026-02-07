@@ -43,7 +43,11 @@ vggt-dev = { features = ["vggt-dev", "cuda126", "py11"], solve-group = "cuda126p
 orbslam3-dev = { features = ["orbslam3-dev", "x11", "opengl"] }
 okvis2-dev = { features = ["okvis2-dev", "cuda126", "py11"] }
 
-# VSLAM-LAB main pipeline    
+# Endoscopy SLAM baselines
+sageslam-dev = { features = ["sageslam-dev", "cuda126", "py10"], solve-group = "cuda126py10" }
+oneslam-dev = { features = ["oneslam-dev", "cuda126", "py10"], solve-group = "cuda126py10" }
+
+# VSLAM-LAB main pipeline
 [feature.vslamlab]
 channels = ["https://prefix.dev/conda-forge"]
 platforms = ["linux-64"]
@@ -885,3 +889,92 @@ libtorch = "*"
 librealsense = "*"
 openmp = "*"
 libgfortran = "3.*"
+
+########################################################################################################################
+########################################################################################################################
+############################################ ENDOSCOPY SLAM BASELINES ##################################################
+########################################################################################################################
+########################################################################################################################
+
+########################################################################################################################
+########################################################################################################################
+# sageslam-dev
+[feature.sageslam-dev]
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["linux-64"]
+
+[feature.sageslam-dev.system-requirements]
+cuda = "12.0"
+
+[feature.sageslam-dev.tasks]
+git-clone = "./git-clone.sh lppllppl920 SAGE-SLAM SAGE-SLAM-DEV"
+install = { cmd = "pip install -e . && cd system && mkdir -p build/Release && cd build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../../ && make -j$(nproc)", cwd = "Baselines/SAGE-SLAM-DEV" }
+execute-mono = { cmd = 'python vslamlab_sageslam_mono.py', cwd = 'Baselines/SAGE-SLAM-DEV' }
+
+[feature.sageslam-dev.dependencies]
+# Build Tools
+compilers = "*"
+cmake = "*"
+make = "*"
+pkg-config = "*"
+
+# Core Libraries
+pytorch-gpu = "*"
+torchvision = "*"
+numpy = "<2"
+opencv = "*"
+scipy = "*"
+
+# SAGE-SLAM dependencies
+h5py = "*"
+gtsam = "*"
+open3d = ">=0.18.0,<0.19"
+trimesh = "*"
+evo = "*"
+tqdm = "*"
+pyyaml = "*"
+matplotlib = "*"
+huggingface_hub = "*"
+pandas = "*"
+eigen = "*"
+
+########################################################################################################################
+########################################################################################################################
+# oneslam-dev
+[feature.oneslam-dev]
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["linux-64"]
+
+[feature.oneslam-dev.system-requirements]
+cuda = "12.0"
+
+[feature.oneslam-dev.tasks]
+git-clone = "./git-clone.sh arcadelab OneSLAM OneSLAM-DEV"
+install = { cmd = "./init_submodules.sh && ./get_tap_model.sh && pip install -e .", cwd = "Baselines/OneSLAM-DEV" }
+execute-mono = { cmd = 'python vslamlab_oneslam_mono.py', cwd = 'Baselines/OneSLAM-DEV' }
+
+[feature.oneslam-dev.dependencies]
+# Build Tools
+compilers = "*"
+cmake = "*"
+make = "*"
+
+# Core Libraries
+pytorch-gpu = "*"
+torchvision = "*"
+numpy = "<2"
+opencv = "*"
+scipy = "*"
+
+# OneSLAM dependencies
+einops = "*"
+tqdm = "*"
+matplotlib = "*"
+pyyaml = "*"
+evo = "*"
+pandas = "*"
+huggingface_hub = "*"
+pillow = "*"
+
+[feature.oneslam-dev.pypi-dependencies]
+g2o-python = "*"

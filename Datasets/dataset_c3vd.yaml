@@ -1,0 +1,27 @@
+dataset_name: c3vd
+
+rgb_hz: 30.0
+url_download_root: 'https://durrlab.github.io/C3VD/'
+modes:
+  - mono
+  - rgbd
+
+# C3VD: Colonoscopy 3D Video Dataset
+# 22 video sequences captured with a clinical HD colonoscope on silicone colon phantoms.
+# Ground truth: 6-DoF camera pose, depth (0-100mm), surface normals, optical flow,
+#   occlusion maps, coverage maps, 3D mesh models.
+# Reference: Bobrow et al., "Colonoscopy 3D video dataset with paired depth from
+#   2D-3D registration", Medical Image Analysis, 2023.
+
+sequence_names:
+  - cecum_t1_a
+  - cecum_t2_a
+  - cecum_t3_a_easy
+  - desc_t1_a
+  - desc_t2_a
+  - sigmoid_t1_a
+  - sigmoid_t2_a
+  - sigmoid_t3_a
+  - trans_t1_a
+  - trans_t2_a
+  - trans_t4_a

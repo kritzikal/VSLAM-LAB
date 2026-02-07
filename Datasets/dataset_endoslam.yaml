@@ -1,0 +1,27 @@
+dataset_name: endoslam
+
+rgb_hz: 20.0
+url_download_root: 'https://data.mendeley.com/datasets/cd2rtzm23r/1'
+
+# EndoSLAM Dataset
+# 35 sub-datasets from 8 ex-vivo porcine GI-tract organs.
+# 42,700 ex-vivo frames + 21,887 synthetic frames (64,587 total).
+# Ground truth: 6-DoF pose from Franka Emika Panda robotic arm (0.1mm repeatability),
+#   high-precision 3D surface models from 3D scanners.
+# Cameras: HighCam (720p), LowCam
+# Reference: Ozyoruk et al., "EndoSLAM dataset and an unsupervised monocular visual
+#   odometry and depth estimation approach for endoscopic videos", Medical Image
+#   Analysis, 2021.  https://arxiv.org/abs/2006.16670
+
+sequence_names:
+  - Colon_Traj1_HighCam
+  - Colon_Traj2_HighCam
+  - Colon_Traj3_HighCam
+  - Colon_Traj4_HighCam
+  - Colon_Traj5_HighCam
+  - SmallIntestine_Traj1_HighCam
+  - SmallIntestine_Traj2_HighCam
+  - SmallIntestine_Traj3_HighCam
+  - Stomach_Traj1_HighCam
+  - Stomach_Traj2_HighCam
+  - Stomach_Traj3_HighCam

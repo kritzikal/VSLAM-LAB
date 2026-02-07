@@ -37,6 +37,10 @@ from Datasets.dataset_ntnu_arl_uw import NTNU_ARL_UW_dataset
 from Datasets.dataset_reefslam import REEFSLAM_dataset
 from Datasets.dataset_s3li import S3LI_dataset
 
+# Endoscopy datasets
+from Datasets.dataset_c3vd import C3VD_dataset
+from Datasets.dataset_endoslam import ENDOSLAM_dataset
+
 SCRIPT_LABEL = f"\033[95m[{os.path.basename(__file__)}]\033[0m "
 
 def get_dataset(dataset_name, benchmark_path):
@@ -76,6 +80,10 @@ def get_dataset(dataset_name, benchmark_path):
         "sweetcorals": lambda: SWEETCORALS_dataset(benchmark_path),
         "ntnu_arl_uw": lambda: NTNU_ARL_UW_dataset(benchmark_path),
         "reefslam": lambda: REEFSLAM_dataset(benchmark_path),
+
+        # Endoscopy datasets
+        "c3vd": lambda: C3VD_dataset(benchmark_path),
+        "endoslam": lambda: ENDOSLAM_dataset(benchmark_path),
     }
 
     return switcher.get(dataset_name, lambda: "Invalid case")()
