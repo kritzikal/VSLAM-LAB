@@ -16,7 +16,7 @@
 exp_mast3rslam:
   Config: config_endoscopy.yaml
   NumRuns: 3
-  Parameters: {verbose: 1, mode: 'mono'}
+  Parameters: {verbose: 0, mode: 'mono'}
   Module: mast3rslam
 
 # DROID-SLAM baseline (established dense visual SLAM)
