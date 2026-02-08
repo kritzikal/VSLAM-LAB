@@ -950,7 +950,7 @@ cuda = "12.0"
 
 [feature.oneslam-dev.tasks]
 git-clone = "./git-clone.sh arcadelab OneSLAM OneSLAM-DEV"
-install = { cmd = "./init_submodules.sh && ./get_tap_model.sh && pip install -e .", cwd = "Baselines/OneSLAM-DEV" }
+install = { cmd = "bash init_submodules.sh && bash get_tap_model.sh && pip install -e .", cwd = "Baselines/OneSLAM-DEV" }
 execute-mono = { cmd = 'python vslamlab_oneslam_mono.py', cwd = 'Baselines/OneSLAM-DEV' }
 
 [feature.oneslam-dev.dependencies]
