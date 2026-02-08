@@ -36,6 +36,8 @@ def evo_metric(metric, groundtruth_csv, trajectory_csv, evaluation_folder, max_t
 
     # Read groundtruth.csv
     gt_df = read_trajectory_csv(groundtruth_csv)
+    if gt_df is None:
+        return [False, f"Ground truth .csv is empty or missing: {groundtruth_csv}"]
     gt_df.to_csv(gt_txt, header=False, index=False, sep=' ', lineterminator='\n')
 
     # Evaluate
