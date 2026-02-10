@@ -11,7 +11,7 @@ SCRIPT_LABEL = f"\033[95m[{os.path.basename(__file__)}]\033[0m "
 class MAST3RSLAM_baseline(BaselineVSLAMLab):
     def __init__(self, baseline_name='mast3rslam', baseline_folder='MASt3R-SLAM'):
         
-        default_parameters = {'verbose': 1, 'mode': 'mono', 
+        default_parameters = {'verbose': 0, 'mode': 'mono',
                               'checkpoints_dir': f'{os.path.join(VSLAMLAB_BASELINES, baseline_folder, 'checkpoints')}', 'use_calib': 1}
         
         # Initialize the baseline

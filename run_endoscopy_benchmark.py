@@ -3,7 +3,7 @@
 
 Orchestrates the full endoscopy benchmarking workflow using VSLAMLAB:
   1. Downloads endoscopy datasets (Hamlyn, C3VD, EndoSLAM)
-  2. Installs SLAM baselines (SAGE-SLAM, OneSLAM, MASt3R-SLAM, DROID-SLAM)
+  2. Installs SLAM baselines (SAGE-SLAM, OneSLAM, MASt3R-SLAM)
   3. Runs experiments across all dataset/baseline combinations
   4. Evaluates trajectories against ground truth (ATE, tracked frames)
   5. Generates comparison visualizations and tables
@@ -31,7 +31,6 @@ Datasets:
 
 Baselines:
     MASt3R-SLAM  - Foundation model SLAM (Leroy et al., 2024)
-    DROID-SLAM   - Dense visual SLAM (Teed & Deng, 2021)
     SAGE-SLAM    - Endoscopy SLAM with priors (Liu et al., ICRA 2022)
     OneSLAM      - Generalized endoscopy SLAM (Teufel et al., IPCAI 2024)
 
