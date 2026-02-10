@@ -108,15 +108,33 @@ def check_oneslam():
     results.append(('R2D2 weights (faster2d2_WASF_N16.pt)', has_r2d2, r2d2_path + size))
 
     # Check g2o python package installed (via pip install g2o-python)
+    # g2o is installed in the oneslam-dev pixi env, so probe it via subprocess
+    import subprocess as _sp
+    has_g2o = False
+    g2o_loc = 'not installed (run: pixi run -e oneslam-dev install)'
     try:
-        import importlib
-        g2o_spec = importlib.util.find_spec('g2o')
-        has_g2o = g2o_spec is not None
-        g2o_loc = g2o_spec.origin if has_g2o else 'not installed'
+        r = _sp.run(
+            ['pixi', 'run', '-e', 'oneslam-dev', 'python', '-c',
+             'import g2o; print(g2o.__file__)'],
+            capture_output=True, text=True, timeout=30,
+            cwd=os.path.dirname(BASELINES_DIR)
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            has_g2o = True
+            g2o_loc = r.stdout.strip()
     except Exception:
-        has_g2o = False
-        g2o_loc = 'not installed'
-    results.append(('g2o python package (pip install g2o-python)', has_g2o, g2o_loc))
+        pass
+    # Fallback: check in current interpreter too
+    if not has_g2o:
+        try:
+            import importlib
+            g2o_spec = importlib.util.find_spec('g2o')
+            if g2o_spec is not None:
+                has_g2o = True
+                g2o_loc = g2o_spec.origin or 'found'
+        except Exception:
+            pass
+    results.append(('g2o python package (g2o-python)', has_g2o, g2o_loc))
 
     return name, results
 
