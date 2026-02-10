@@ -56,9 +56,23 @@ def check_sageslam():
     cloned = os.path.isdir(base)
     results.append(('Repository cloned', cloned, base))
 
-    # Check build (cmake output)
+    # Check Docker image (SAGE-SLAM runs via Docker)
+    import subprocess as _sp2
+    has_docker = False
+    docker_info = 'not built (run: bash Baselines/sageslam_docker_build.sh)'
+    try:
+        r = _sp2.run(['docker', 'image', 'inspect', 'vslamlab-sageslam'],
+                     capture_output=True, timeout=10)
+        if r.returncode == 0:
+            has_docker = True
+            docker_info = 'vslamlab-sageslam image found'
+    except Exception:
+        docker_info = 'docker not available'
+    results.append(('Docker image (vslamlab-sageslam)', has_docker, docker_info))
+
+    # Check compiled binary (built inside Docker, saved via volume mount)
     build_dir = os.path.join(base, 'build', 'Release', 'bin')
-    results.append(('Built (build/Release/bin)', os.path.isdir(build_dir), build_dir))
+    results.append(('Compiled binary (build/Release/bin)', os.path.isdir(build_dir), build_dir))
 
     # Check pretrained weights
     pretrained_dir = os.path.join(base, 'pretrained')
