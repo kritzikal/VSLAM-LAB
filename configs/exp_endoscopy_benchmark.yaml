@@ -1,6 +1,6 @@
 # Endoscopy SLAM Benchmarking Experiment Configuration
 #
-# Compares SAGE-SLAM, OneSLAM, and MASt3R-SLAM on endoscopy datasets.
+# Compares MASt3R-SLAM, SAGE-SLAM, and OneSLAM on endoscopy datasets.
 # Uses datasets with ground truth for quantitative evaluation.
 #
 # Metrics computed by VSLAMLAB:
@@ -18,13 +18,6 @@ exp_mast3rslam:
   NumRuns: 3
   Parameters: {verbose: 0, mode: 'mono'}
   Module: mast3rslam
-
-# DROID-SLAM baseline (established dense visual SLAM)
-exp_droidslam:
-  Config: config_endoscopy.yaml
-  NumRuns: 3
-  Parameters: {verbose: 1, mode: 'mono'}
-  Module: droidslam
 
 # SAGE-SLAM (endoscopy-specialized SLAM, ICRA 2022)
 exp_sageslam:

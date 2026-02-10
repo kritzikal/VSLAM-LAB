@@ -10,12 +10,6 @@ exp_mast3rslam_quick:
   Parameters: {verbose: 0, mode: 'mono', rgb_idx: [0, 200]}
   Module: mast3rslam
 
-exp_droidslam_quick:
-  Config: config_hamlyn_endoscopy.yaml
-  NumRuns: 1
-  Parameters: {verbose: 1, mode: 'mono', rgb_idx: [0, 200]}
-  Module: droidslam
-
 exp_sageslam_quick:
   Config: config_hamlyn_endoscopy.yaml
   NumRuns: 1
