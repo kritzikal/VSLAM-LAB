@@ -38,7 +38,14 @@ echo "=========================================="
 echo " Cleaning stale build caches..."
 echo "=========================================="
 
-rm -rf system/thirdparty/build_Release build
+# Clean from host first (best effort)
+rm -rf system/thirdparty/build_Release build 2>/dev/null || true
+# Clean from Docker too (handles files owned by Docker user)
+docker run --rm \
+    -v "$(pwd)":"/home/$(whoami)" \
+    -w "/home/$(whoami)" \
+    "$IMAGE_NAME" \
+    rm -rf system/thirdparty/build_Release build
 
 echo "=========================================="
 echo " Compiling SAGE-SLAM inside Docker..."
@@ -53,7 +60,7 @@ docker run --rm --gpus all \
         mkdir -p build/$SLAM_BUILD_TYPE && \
         cd build/$SLAM_BUILD_TYPE && \
         cmake -DCMAKE_BUILD_TYPE=$SLAM_BUILD_TYPE ../../system && \
-        make -j$(nproc)'
+        make -j4'
 
 echo "=========================================="
 echo " SAGE-SLAM Docker build complete."
