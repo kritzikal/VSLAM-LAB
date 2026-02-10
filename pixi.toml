@@ -908,7 +908,7 @@ cuda = "12.0"
 
 [feature.sageslam-dev.tasks]
 git-clone = "./git-clone.sh lppllppl920 SAGE-SLAM SAGE-SLAM-DEV"
-install = { cmd = "pip install -e . && cd system && mkdir -p build/Release && cd build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../../ && make -j$(nproc)", cwd = "Baselines/SAGE-SLAM-DEV" }
+install = { cmd = "bash system/thirdparty/makedeps_with_argument.sh Release && mkdir -p build/Release && cd build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../../system && make -j$(nproc)", cwd = "Baselines/SAGE-SLAM-DEV" }
 execute-mono = { cmd = 'python vslamlab_sageslam_mono.py', cwd = 'Baselines/SAGE-SLAM-DEV' }
 
 [feature.sageslam-dev.dependencies]
