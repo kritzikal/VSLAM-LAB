@@ -35,6 +35,12 @@ docker build \
     .
 
 echo "=========================================="
+echo " Cleaning stale build caches..."
+echo "=========================================="
+
+rm -rf system/thirdparty/build_Release build
+
+echo "=========================================="
 echo " Compiling SAGE-SLAM inside Docker..."
 echo "=========================================="
 
