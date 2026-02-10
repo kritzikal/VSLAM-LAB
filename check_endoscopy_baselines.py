@@ -107,15 +107,16 @@ def check_oneslam():
         size = f' ({mb:.0f} MB)'
     results.append(('R2D2 weights (faster2d2_WASF_N16.pt)', has_r2d2, r2d2_path + size))
 
-    # Check g2opy built
-    g2opy_dir = os.path.join(base, 'Thirdparty', 'g2opy')
-    g2opy_built = False
-    if os.path.isdir(g2opy_dir):
-        for root, dirs, files in os.walk(g2opy_dir):
-            if any(f.endswith('.so') for f in files):
-                g2opy_built = True
-                break
-    results.append(('g2opy built (.so exists)', g2opy_built, g2opy_dir))
+    # Check g2o python package installed (via pip install g2o-python)
+    try:
+        import importlib
+        g2o_spec = importlib.util.find_spec('g2o')
+        has_g2o = g2o_spec is not None
+        g2o_loc = g2o_spec.origin if has_g2o else 'not installed'
+    except Exception:
+        has_g2o = False
+        g2o_loc = 'not installed'
+    results.append(('g2o python package (pip install g2o-python)', has_g2o, g2o_loc))
 
     return name, results
 
