@@ -1,0 +1,10 @@
+# Run OneSLAM on the camera calibration endoscopy dataset
+#
+# Usage:
+#   pixi run -e vslamlab vslamlab configs/exp_camcalib_oneslam.yaml
+
+exp_oneslam_camcalib:
+  Config: config_camcalib.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono'}
+  Module: oneslam-dev

@@ -1,0 +1,7 @@
+dataset_name: camcalib
+
+rgb_hz: 30.0
+modes: ['mono']
+
+sequence_names:
+  - 2-2
