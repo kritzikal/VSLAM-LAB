@@ -681,13 +681,11 @@ def num_tracked_frames(values, dataset_sequences, figures_path, experiments, sha
         if shared_scale:
             yticks = [0, 1]
         else:
-            yticks = [0, max_rgb[sequence_name]]
+            yticks = [0, max_rgb[sequence_name]] if max_rgb[sequence_name] > 0 else [0, 1]
         axs[splt['id']].grid(True, which='both', linestyle='--', linewidth=0.5, alpha=0.7)
         axs[splt['id']].set_xticklabels([])
         axs[splt['id']].set_ylim(yticks)
-        axs[splt['id']].tick_params(axis='y', labelsize=FONT_SIZE) 
-        # Only set minor locator if max_rgb is positive
-
+        axs[splt['id']].tick_params(axis='y', labelsize=FONT_SIZE)
         if max_rgb[sequence_name] > 0:
             axs[splt['id']].yaxis.set_minor_locator(ticker.MultipleLocator(max_rgb[sequence_name] / 4))
         axs[splt['id']].set_yticks(yticks)
