@@ -1,0 +1,10 @@
+tune_006_depth_scale_3p0:
+  Config: config_camcalib.yaml
+  Module: oneslam-dev
+  NumRuns: 1
+  Parameters:
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

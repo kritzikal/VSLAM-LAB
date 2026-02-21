@@ -1,0 +1,10 @@
+combo_r2_local_ba_size10_point_samplerr2d2_tracked_point_num_min_50:
+  Config: config_camcalib.yaml
+  Module: oneslam-dev
+  NumRuns: 1
+  Parameters:
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

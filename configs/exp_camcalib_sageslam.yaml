@@ -1,0 +1,5 @@
+exp_sageslam_camcalib:
+  Config: config_camcalib.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono', enable_gui: 'false'}
+  Module: sageslam-dev

@@ -1,0 +1,14 @@
+dataset_name: camcalib
+
+rgb_hz: 30.0
+url_download_root: ''
+modes:
+  - mono
+
+# CAMCALIB: Camera Calibration Endoscopy Dataset
+# Endoscopic surgical sequences with EM-tracked ground truth trajectories.
+# Ground truth: 6-DoF camera pose (position in mm, unit quaternion rotation).
+# Camera: Pinhole model with radial-tangential distortion, 1406x1374 resolution.
+
+sequence_names:
+  - 2-2

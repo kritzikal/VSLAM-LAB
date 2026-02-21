@@ -1,0 +1,11 @@
+sage_combo_track_desc_inlier_06:
+  Config: config_camcalib.yaml
+  Module: sageslam-dev
+  NumRuns: 1
+  Parameters:
+    enable_gui: 'false'
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

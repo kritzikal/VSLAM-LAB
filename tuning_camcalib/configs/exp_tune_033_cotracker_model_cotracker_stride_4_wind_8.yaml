@@ -1,0 +1,10 @@
+tune_033_cotracker_model_cotracker_stride_4_wind_8:
+  Config: config_camcalib.yaml
+  Module: oneslam-dev
+  NumRuns: 1
+  Parameters:
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

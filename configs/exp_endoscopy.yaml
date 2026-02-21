@@ -1,0 +1,22 @@
+# OneSLAM-DEV on camcalib with best tuned parameters
+#
+# Based on exp_combo_r1_local_ba_size10_point_sampler_r2d2.yaml
+# Combo tuning (ONESLAM_CAMCALIB_COMBO.md) found local_ba_size=10
+# combined with point_sampler=r2d2 gives the best ATE RMSE.
+#
+# Best result: local_ba_size=10, point_sampler=r2d2
+#   -> ATE RMSE = 5.67 mm (-67.1% vs baseline 17.22 mm)
+#
+# Usage:
+#   pixi run -e vslamlab vslamlab configs/exp_endoscopy.yaml
+
+exp_endoscopy:
+  Config: config_camcalib.yaml
+  Module: oneslam-dev
+  NumRuns: 1
+  Parameters:
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

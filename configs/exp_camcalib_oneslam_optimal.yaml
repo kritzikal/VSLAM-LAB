@@ -1,0 +1,22 @@
+# OneSLAM-DEV on camcalib with optimal tuned parameters
+#
+# Combo tuning (ONESLAM_CAMCALIB_COMBO.md) found that local_ba_size=10
+# combined with tracking_ba_iterations=15 gives the best result.
+# Greedy forward selection confirmed no further parameters improve on this.
+#
+# Best result: local_ba_size=10, tracking_ba_iterations=15
+#   -> ATE RMSE = 6.47 mm (-62.4% vs baseline 17.22 mm)
+#
+# Usage:
+#   pixi run -e vslamlab vslamlab configs/exp_camcalib_oneslam_optimal.yaml
+
+exp_oneslam_camcalib_optimal:
+  Config: config_camcalib.yaml
+  Module: oneslam-dev
+  NumRuns: 1
+  Parameters:
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

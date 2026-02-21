@@ -75,6 +75,13 @@ class SAGESLAM_baseline_dev(SAGESLAM_baseline):
         super().__init__(baseline_name='sageslam-dev', baseline_folder='SAGE-SLAM-DEV')
 
     def is_installed(self):
+        import subprocess
+        try:
+            result = subprocess.run(['docker', 'image', 'inspect', 'vslamlab-sageslam'],
+                                    capture_output=True, timeout=10)
+            docker_ok = result.returncode == 0
+        except Exception:
+            docker_ok = False
         build_dir = os.path.join(self.baseline_path, 'build', 'Release', 'bin')
-        is_installed = os.path.isdir(build_dir)
-        return (True, 'is installed') if is_installed else (False, 'not installed (auto install available)')
+        is_installed = docker_ok and os.path.isdir(build_dir)
+        return (True, 'is installed') if is_installed else (False, 'not installed (run: bash Baselines/sageslam_docker_build.sh)')

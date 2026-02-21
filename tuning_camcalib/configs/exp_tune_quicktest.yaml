@@ -1,0 +1,6 @@
+# Quick test: baseline settings, first 300 frames
+tune_quicktest:
+  Config: config_camcalib.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono', rgb_idx: [0, 299]}
+  Module: oneslam-dev

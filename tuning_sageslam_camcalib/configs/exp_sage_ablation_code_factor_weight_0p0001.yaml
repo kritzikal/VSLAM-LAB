@@ -1,0 +1,11 @@
+sage_ablation_code_factor_weight_0p0001:
+  Config: config_camcalib.yaml
+  Module: sageslam-dev
+  NumRuns: 1
+  Parameters:
+    enable_gui: 'false'
+    mode: mono
+    rgb_idx:
+    - 0
+    - 541
+    verbose: 1

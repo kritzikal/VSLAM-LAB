@@ -908,7 +908,7 @@ cuda = "12.0"
 
 [feature.sageslam-dev.tasks]
 git-clone = "./git-clone.sh lppllppl920 SAGE-SLAM SAGE-SLAM-DEV"
-install = { cmd = "bash system/thirdparty/makedeps_with_argument.sh Release && mkdir -p build/Release && cd build/Release && cmake -DCMAKE_BUILD_TYPE=Release ../../system && make -j$(nproc)", cwd = "Baselines/SAGE-SLAM-DEV" }
+install = "bash Baselines/sageslam_docker_build.sh"
 execute-mono = { cmd = 'python vslamlab_sageslam_mono.py', cwd = 'Baselines/SAGE-SLAM-DEV' }
 
 [feature.sageslam-dev.dependencies]
@@ -950,7 +950,7 @@ cuda = "12.0"
 
 [feature.oneslam-dev.tasks]
 git-clone = "./git-clone.sh arcadelab OneSLAM OneSLAM-DEV"
-install = { cmd = "bash init_submodules.sh && bash get_tap_model.sh && cd misc && git clone https://github.com/uoip/g2opy.git && cp fixed_g2opy_files/eigen_types.h g2opy/python/types/eigen_types.h && cp fixed_g2opy_files/setup.py g2opy/setup.py && cd g2opy && mkdir -p build && cd build && cmake .. && make -j$(nproc) && cd .. && python setup.py install && cd ../..", cwd = "Baselines/OneSLAM-DEV" }
+install = { cmd = "bash init_submodules.sh && bash get_tap_model.sh && pip install g2o-python", cwd = "Baselines/OneSLAM-DEV" }
 execute-mono = { cmd = 'python vslamlab_oneslam_mono.py', cwd = 'Baselines/OneSLAM-DEV' }
 
 [feature.oneslam-dev.dependencies]
@@ -967,6 +967,7 @@ opencv = "*"
 scipy = "*"
 
 # OneSLAM dependencies
+timm = "*"
 einops = "*"
 tqdm = "*"
 matplotlib = "*"

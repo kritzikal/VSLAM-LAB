@@ -56,9 +56,23 @@ def check_sageslam():
     cloned = os.path.isdir(base)
     results.append(('Repository cloned', cloned, base))
 
-    # Check build (cmake output)
+    # Check Docker image (SAGE-SLAM runs via Docker)
+    import subprocess as _sp2
+    has_docker = False
+    docker_info = 'not built (run: bash Baselines/sageslam_docker_build.sh)'
+    try:
+        r = _sp2.run(['docker', 'image', 'inspect', 'vslamlab-sageslam'],
+                     capture_output=True, timeout=10)
+        if r.returncode == 0:
+            has_docker = True
+            docker_info = 'vslamlab-sageslam image found'
+    except Exception:
+        docker_info = 'docker not available'
+    results.append(('Docker image (vslamlab-sageslam)', has_docker, docker_info))
+
+    # Check compiled binary (built inside Docker, saved via volume mount)
     build_dir = os.path.join(base, 'build', 'Release', 'bin')
-    results.append(('Built (build/Release/bin)', os.path.isdir(build_dir), build_dir))
+    results.append(('Compiled binary (build/Release/bin)', os.path.isdir(build_dir), build_dir))
 
     # Check pretrained weights
     pretrained_dir = os.path.join(base, 'pretrained')
@@ -107,15 +121,34 @@ def check_oneslam():
         size = f' ({mb:.0f} MB)'
     results.append(('R2D2 weights (faster2d2_WASF_N16.pt)', has_r2d2, r2d2_path + size))
 
-    # Check g2opy built
-    g2opy_dir = os.path.join(base, 'Thirdparty', 'g2opy')
-    g2opy_built = False
-    if os.path.isdir(g2opy_dir):
-        for root, dirs, files in os.walk(g2opy_dir):
-            if any(f.endswith('.so') for f in files):
-                g2opy_built = True
-                break
-    results.append(('g2opy built (.so exists)', g2opy_built, g2opy_dir))
+    # Check g2o python package installed (via pip install g2o-python)
+    # g2o is installed in the oneslam-dev pixi env, so probe it via subprocess
+    import subprocess as _sp
+    has_g2o = False
+    g2o_loc = 'not installed (run: pixi run -e oneslam-dev install)'
+    try:
+        r = _sp.run(
+            ['pixi', 'run', '-e', 'oneslam-dev', 'python', '-c',
+             'import g2o; print(g2o.__file__)'],
+            capture_output=True, text=True, timeout=30,
+            cwd=os.path.dirname(BASELINES_DIR)
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            has_g2o = True
+            g2o_loc = r.stdout.strip()
+    except Exception:
+        pass
+    # Fallback: check in current interpreter too
+    if not has_g2o:
+        try:
+            import importlib
+            g2o_spec = importlib.util.find_spec('g2o')
+            if g2o_spec is not None:
+                has_g2o = True
+                g2o_loc = g2o_spec.origin or 'found'
+        except Exception:
+            pass
+    results.append(('g2o python package (g2o-python)', has_g2o, g2o_loc))
 
     return name, results
 
