@@ -1,0 +1,38 @@
+run_id,round,exp_name,changes,ate_rmse_mm,ate_mean_mm,ate_median_mm,run_time,elapsed
+0,1,combo_r1_local_ba_size10_depth_scale_0p5,"[('local_ba_size', 10), ('depth_scale', 0.5)]",10.97,9.11,7.30,610.0554220676422,617.0266456604004
+1,1,combo_r1_local_ba_size10_depth_scale_1p0,"[('local_ba_size', 10), ('depth_scale', 1.0)]",7.68,6.94,5.99,630.0588438510895,637.4555811882019
+2,1,combo_r1_local_ba_size10_depth_scale_2p0,"[('local_ba_size', 10), ('depth_scale', 2.0)]",7.59,6.69,6.80,620.0597052574158,627.262060880661
+3,1,combo_r1_local_ba_size10_depth_scale_5p0,"[('local_ba_size', 10), ('depth_scale', 5.0)]",6.98,6.18,6.43,570.0551998615265,576.9044814109802
+4,1,combo_r1_local_ba_size10_point_sampler_orb,"[('local_ba_size', 10), ('point_sampler', 'orb')]",17.11,14.33,12.04,500.0483047962189,506.4650135040283
+5,1,combo_r1_local_ba_size10_point_sampler_sift,"[('local_ba_size', 10), ('point_sampler', 'sift')]",17.49,15.05,13.73,540.0688781738281,547.6071486473083
+6,1,combo_r1_local_ba_size10_point_sampler_r2d2,"[('local_ba_size', 10), ('point_sampler', 'r2d2')]",5.67,4.74,3.74,590.0579888820648,597.1478643417358
+7,1,combo_r1_local_ba_size10_keyframe_subsample_2,"[('local_ba_size', 10), ('keyframe_subsample', 2)]",11.27,9.35,6.93,690.0623903274536,697.1231923103333
+8,1,combo_r1_local_ba_size10_keyframe_subsample_3,"[('local_ba_size', 10), ('keyframe_subsample', 3)]",8.69,7.76,8.71,600.0583646297455,606.9868366718292
+9,1,combo_r1_local_ba_size10_keyframe_subsample_6,"[('local_ba_size', 10), ('keyframe_subsample', 6)]",9.75,8.65,7.83,560.0560495853424,566.7567698955536
+10,1,combo_r1_local_ba_size10_section_length_8,"[('local_ba_size', 10), ('section_length', 8)]",11.86,10.33,8.42,550.0605809688568,556.9472994804382
+11,1,combo_r1_local_ba_size10_section_length_10,"[('local_ba_size', 10), ('section_length', 10)]",12.58,10.93,9.25,580.0571336746216,586.9441413879395
+12,1,combo_r1_local_ba_size10_section_length_16,"[('local_ba_size', 10), ('section_length', 16)]",11.13,10.04,9.80,550.0572421550751,556.954398393631
+13,1,combo_r1_local_ba_size10_tracking_ba_iterations_3,"[('local_ba_size', 10), ('tracking_ba_iterations', 3)]",8.67,7.78,6.86,560.0571396350861,567.031242609024
+14,1,combo_r1_local_ba_size10_tracking_ba_iterations_5,"[('local_ba_size', 10), ('tracking_ba_iterations', 5)]",8.23,6.94,5.57,570.0588836669922,576.9586815834045
+15,1,combo_r1_local_ba_size10_tracking_ba_iterations_10,"[('local_ba_size', 10), ('tracking_ba_iterations', 10)]",11.61,9.65,7.38,580.0607855319977,586.9881000518799
+16,1,combo_r1_local_ba_size10_tracking_ba_iterations_15,"[('local_ba_size', 10), ('tracking_ba_iterations', 15)]",6.47,5.83,5.50,560.0573279857635,566.7767078876495
+17,1,combo_r1_local_ba_size10_tracked_point_num_min_50,"[('local_ba_size', 10), ('tracked_point_num_min', 50)]",12.89,10.73,8.19,530.0524904727936,537.5278627872467
+18,1,combo_r1_local_ba_size10_tracked_point_num_min_100,"[('local_ba_size', 10), ('tracked_point_num_min', 100)]",13.86,12.25,10.80,570.0531034469604,576.7084538936615
+19,1,combo_r1_local_ba_size10_tracked_point_num_min_150,"[('local_ba_size', 10), ('tracked_point_num_min', 150)]",15.25,12.96,9.35,570.0578346252441,576.6342515945435
+20,2,combo_r2_local_ba_size10_point_samplerr2d2_depth_scale_0p5,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('depth_scale', 0.5)]",10.38,9.31,9.44,660.0608739852905,666.9249176979065
+21,2,combo_r2_local_ba_size10_point_samplerr2d2_depth_scale_1p0,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('depth_scale', 1.0)]",,,,50.033902168273926,54.23355436325073
+22,2,combo_r2_local_ba_size10_point_samplerr2d2_depth_scale_2p0,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('depth_scale', 2.0)]",,,,40.03175020217896,44.46361470222473
+23,2,combo_r2_local_ba_size10_point_samplerr2d2_depth_scale_5p0,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('depth_scale', 5.0)]",,,,50.06343245506287,54.34288144111633
+24,2,combo_r2_local_ba_size10_point_samplerr2d2_keyframe_subsample_2,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('keyframe_subsample', 2)]",,,,50.03243446350098,54.33341145515442
+25,2,combo_r2_local_ba_size10_point_samplerr2d2_keyframe_subsample_3,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('keyframe_subsample', 3)]",,,,40.03417086601257,44.37373614311218
+26,2,combo_r2_local_ba_size10_point_samplerr2d2_keyframe_subsample_6,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('keyframe_subsample', 6)]",,,,40.03703188896179,44.423484802246094
+27,2,combo_r2_local_ba_size10_point_samplerr2d2_section_length_8,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('section_length', 8)]",9.13,7.94,7.17,600.0599129199982,606.9963409900665
+28,2,combo_r2_local_ba_size10_point_samplerr2d2_section_length_10,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('section_length', 10)]",10.19,8.95,8.50,580.0550196170807,586.9226858615875
+29,2,combo_r2_local_ba_size10_point_samplerr2d2_section_length_16,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('section_length', 16)]",11.40,9.49,8.02,570.05650639534,576.9783661365509
+30,2,combo_r2_local_ba_size10_point_samplerr2d2_tracking_ba_iterations_3,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracking_ba_iterations', 3)]",8.28,7.24,6.67,580.0664448738098,586.8934602737427
+31,2,combo_r2_local_ba_size10_point_samplerr2d2_tracking_ba_iterations_5,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracking_ba_iterations', 5)]",11.62,10.24,8.63,570.0552024841309,577.0172312259674
+32,2,combo_r2_local_ba_size10_point_samplerr2d2_tracking_ba_iterations_10,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracking_ba_iterations', 10)]",12.80,11.07,9.50,580.0570170879364,587.018060207367
+33,2,combo_r2_local_ba_size10_point_samplerr2d2_tracking_ba_iterations_15,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracking_ba_iterations', 15)]",7.80,7.23,7.59,530.060042142868,536.0366389751434
+34,2,combo_r2_local_ba_size10_point_samplerr2d2_tracked_point_num_min_50,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracked_point_num_min', 50)]",14.52,12.63,10.82,440.05358624458313,445.87726163864136
+35,2,combo_r2_local_ba_size10_point_samplerr2d2_tracked_point_num_min_100,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracked_point_num_min', 100)]",9.61,8.11,7.63,410.0533859729767,415.3527889251709
+36,2,combo_r2_local_ba_size10_point_samplerr2d2_tracked_point_num_min_150,"[('local_ba_size', 10), ('point_sampler', 'r2d2'), ('tracked_point_num_min', 150)]",9.09,8.37,8.20,390.047354221344,395.23930644989014

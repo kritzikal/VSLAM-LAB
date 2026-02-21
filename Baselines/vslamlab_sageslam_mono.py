@@ -69,23 +69,39 @@ def read_rgb_csv(rgb_csv):
     return timestamps, image_paths
 
 
-def create_hdf5_from_images(image_paths, sequence_path, fx, fy, cx, cy, output_path):
+def create_hdf5_from_images(image_paths, sequence_path, fx, fy, cx, cy, output_path,
+                            target_width=640, verbose=0):
     """Convert VSLAMLAB images + calibration to SAGE-SLAM HDF5 format.
+
+    Images are resized to target_width (preserving aspect ratio) to match
+    SAGE-SLAM's expected input scale. Intrinsics are adjusted accordingly.
 
     SAGE-SLAM expects HDF5 with:
       - "color":      [N, H, W, 3] uint8
       - "mask":       [1, H, W, 1] uint8 (applied uniformly)
-      - "intrinsics": [1, 3, 3] float32 with fx,fy,cx,cy,W,H
+      - "intrinsics": [1, 3, 3] float32
     """
     import cv2
     import h5py
 
-    # Read first image to get dimensions
+    # Read first image to get original dimensions
     first_img_path = os.path.join(sequence_path, image_paths[0])
     first_img = cv2.imread(first_img_path)
     if first_img is None:
         raise RuntimeError(f"Cannot read first image: {first_img_path}")
-    h, w = first_img.shape[:2]
+    orig_h, orig_w = first_img.shape[:2]
+
+    # Compute resize scale
+    scale = target_width / orig_w
+    w = target_width
+    h = int(orig_h * scale)
+    scaled_fx = fx * scale
+    scaled_fy = fy * scale
+    scaled_cx = cx * scale
+    scaled_cy = cy * scale
+
+    if verbose > 0:
+        print(f"[SAGE-SLAM] Resizing {orig_w}x{orig_h} -> {w}x{h} (scale={scale:.3f})")
 
     with h5py.File(output_path, 'w') as hf:
         # Create color dataset
@@ -95,25 +111,23 @@ def create_hdf5_from_images(image_paths, sequence_path, fx, fy, cx, cy, output_p
             img_path = os.path.join(sequence_path, img_rel)
             img = cv2.imread(img_path)
             if img is not None:
-                # Convert BGR to RGB
-                color_ds[i] = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                img_resized = cv2.resize(img, (w, h), interpolation=cv2.INTER_AREA)
+                color_ds[i] = cv2.cvtColor(img_resized, cv2.COLOR_BGR2RGB)
 
         # Create mask (all ones = no masking)
         mask = np.ones((1, h, w, 1), dtype=np.uint8) * 255
         hf.create_dataset('mask', data=mask)
 
         # Create intrinsics [1, 3, 3]
-        # SAGE-SLAM reads: fx=K[0,0], fy=K[0,1], cx=K[0,2], cy=K[0,4], w=K[0,5], h not directly
-        # Actually from the code: fx=data[0], fy=data[4], cx=data[2], cy=data[5]
-        # Where data is flattened from [3,3] -> indices [0,4,2,5] = [K[0,0], K[1,1], K[0,2], K[1,2]]
-        # So K[0,0]=fx, K[1,1]=fy, K[0,2]=cx, K[1,2]=cy, and w/h from K[0,1] and K[2,0]
+        # SAGE-SLAM reads flattened: data[0]=fx, data[4]=fy, data[2]=cx, data[5]=cy
+        # K[0,1]=width, K[1,0]=height
         K = np.zeros((1, 3, 3), dtype=np.float32)
-        K[0, 0, 0] = fx        # index 0
-        K[0, 0, 1] = w         # index 1 (width)
-        K[0, 0, 2] = cx        # index 2
-        K[0, 1, 0] = h         # index 3 (height)
-        K[0, 1, 1] = fy        # index 4
-        K[0, 1, 2] = cy        # index 5
+        K[0, 0, 0] = scaled_fx   # index 0
+        K[0, 0, 1] = w           # index 1 (width)
+        K[0, 0, 2] = scaled_cx   # index 2
+        K[0, 1, 0] = h           # index 3 (height)
+        K[0, 1, 1] = scaled_fy   # index 4
+        K[0, 1, 2] = scaled_cy   # index 5
         hf.create_dataset('intrinsics', data=K)
 
     return h, w
@@ -222,7 +236,8 @@ def main():
         hdf5_path = os.path.join(tmpdir, 'input_data.hdf5')
         if args.verbose > 0:
             print(f"[SAGE-SLAM] Creating HDF5 from {len(image_paths)} images...")
-        create_hdf5_from_images(image_paths, args.sequence_path, fx, fy, cx, cy, hdf5_path)
+        create_hdf5_from_images(image_paths, args.sequence_path, fx, fy, cx, cy, hdf5_path,
+                                verbose=args.verbose)
 
         # Create output directory inside tmpdir
         output_dir = os.path.join(tmpdir, 'output')

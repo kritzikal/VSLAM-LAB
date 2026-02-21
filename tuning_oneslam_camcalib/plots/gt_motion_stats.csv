@@ -1,0 +1,16 @@
+metric,processed_0_18s,full_0_51s,unit
+Duration,18.0,18.0,s
+Num frames,135,136,
+Total path length,109.1,109.1,mm
+Mean speed,24.43,24.25,mm/s
+Median speed,19.04,18.99,mm/s
+95th pct speed,58.68,58.55,mm/s
+Max speed,103.92,103.92,mm/s
+Mean acceleration,323.7,321.2,mm/s²
+Max acceleration,2710.5,2710.5,mm/s²
+Mean angular velocity,21.34,21.18,deg/s
+Median angular velocity,16.32,16.26,deg/s
+Max angular velocity,72.09,72.09,deg/s
+Workspace X range,4.9,4.9,mm
+Workspace Y range,76.2,76.2,mm
+Workspace Z range,12.2,12.2,mm

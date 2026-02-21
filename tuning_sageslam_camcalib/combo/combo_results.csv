@@ -1,0 +1,32 @@
+run_id,combo_name,changes,ate_rmse_mm,ate_mean_mm,ate_median_mm,n_tracked,n_evaluated,run_time,elapsed
+0,baseline,defaults,21.27,19.12,17.97,243,242,100.03547525405884,105.74255132675171
+1,track_damp_5e5,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_init_damp=5e-05",1.19,1.02,0.84,18,17,100.03187894821168,0
+2,track_damp_5e4,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_init_damp=0.0005",16.98,15.78,14.46,242,241,100.03223252296448,105.63283252716064
+3,track_damp_1e3,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_init_damp=0.001",1.01,0.89,0.85,17,16,110.0344533920288,0
+4,track_grad_1e5,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_min_grad_thresh=1e-05",4.33,3.84,3.44,81,80,110.04144263267516,0
+5,track_grad_1e3,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_min_grad_thresh=0.001",9.10,8.15,7.95,230,229,100.03468036651611,105.57764983177185
+6,track_param_1e3,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_min_param_inc_thresh=0.001",5.85,5.29,4.25,89,88,100.03370070457458,0
+7,track_param_1e1,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_min_param_inc_thresh=0.1",1.73,1.47,1.03,20,19,100.03090810775755,0
+8,track_jac_1e3,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_jac_update_err_inc_threshold=0.001",2.88,2.49,2.38,44,43,110.0341613292694,0
+9,track_jac_5e2,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_jac_update_err_inc_threshold=0.05",4.33,3.84,3.44,81,80,110.03462767601012,0
+10,track_reproj_05,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracker_reproj_factor_weight=0.5",3.58,3.11,3.84,39,38,110.03916573524477,0
+11,track_reproj_02,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracker_reproj_factor_weight=0.2",4.94,4.31,3.69,80,79,110.03893303871156,0
+12,track_geom_05,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracker_match_geom_factor_weight=0.5",12.31,11.14,10.51,251,250,100.03190612792967,105.58418321609497
+13,track_teaser_pmc,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, teaser_tracker_inlier_selection_mode=pmc_exact",,,,,,1820.085307359696,1823.8015577793121
+14,track_teaser_noise10,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, teaser_noise_bound_multiplier=10.0",9.74,8.45,7.27,123,122,100.03302025794984,0
+15,track_isam_wildfire_1e4,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_wildfire_threshold=0.0001",2.51,2.14,1.98,18,17,120.03253602981567,0
+16,track_isam_relin_true,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true",12.31,11.14,10.51,251,250,130.03585267066956,136.35176467895508
+17,track_desc_inlier_02,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, new_kf_max_desc_inlier_ratio=0.2",1.24,1.01,0.84,17,16,130.03720045089722,0
+18,track_desc_inlier_06,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, new_kf_max_desc_inlier_ratio=0.6",0.84,0.74,0.64,17,16,120.03301906585692,0
+19,track_stable_conservative,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_init_damp=0.0005, tracker_reproj_factor_weight=0.5, tracking_min_grad_thresh=1e-05",21.23,18.72,16.30,261,260,120.03460669517516,126.38775157928467
+20,track_stable_iters,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_max_num_iters=80, tracking_init_damp=0.0005",1.42,1.25,1.23,18,17,120.03615164756776,0
+21,track_full_stable,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, tracking_init_damp=0.0005, tracker_reproj_factor_weight=0.5, isam_wildfire_threshold=0.0001, tracking_min_grad_thresh=1e-05",3.66,3.30,3.07,37,36,110.0351390838623,0
+22,track_base_inlier085,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, new_kf_max_inlier_ratio=0.85, pho_num_samples=2048",1.51,1.25,1.11,18,17,110.03175592422484,0
+23,track_relin_damp5e4,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_init_damp=0.0005",16.98,15.78,14.46,242,241,120.03577494621275,126.21795439720154
+24,track_relin_conservative,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_init_damp=0.0005, tracker_reproj_factor_weight=0.5, tracking_min_grad_thresh=1e-05",21.23,18.72,16.30,261,260,120.03482866287231,126.3814160823822
+25,track_relin_damp_grad,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_init_damp=0.0005, tracking_min_grad_thresh=1e-05",16.98,15.78,14.46,242,241,110.03448796272278,116.32187223434448
+26,track_relin_reproj02,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracker_reproj_factor_weight=0.2",3.00,2.63,2.35,36,35,100.03338718414308,0
+27,track_relin_damp_reproj02,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_init_damp=0.0005, tracker_reproj_factor_weight=0.2",2.88,2.61,2.29,23,22,100.03277087211607,0
+28,track_relin_damp_grad_reproj02,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_init_damp=0.0005, tracking_min_grad_thresh=1e-05, tracker_reproj_factor_weight=0.2",1.34,1.14,1.00,18,17,100.03464269638062,0
+29,track_relin_jac5e2,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_jac_update_err_inc_threshold=0.05",2.99,2.59,2.34,36,35,100.03973078727722,0
+30,track_ultimate,"new_kf_max_area_ratio=0.9, code_factor_weight=0.01, isam_partial_relin_check=true, tracking_init_damp=0.0005, tracking_min_grad_thresh=1e-05, tracking_jac_update_err_inc_threshold=0.05, tracker_reproj_factor_weight=0.2",12.94,11.34,10.60,232,231,120.0339207649231,126.32445526123047

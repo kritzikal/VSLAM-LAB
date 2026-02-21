@@ -967,6 +967,7 @@ opencv = "*"
 scipy = "*"
 
 # OneSLAM dependencies
+timm = "*"
 einops = "*"
 tqdm = "*"
 matplotlib = "*"

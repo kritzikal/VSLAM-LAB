@@ -1,0 +1,6 @@
+# Full dataset baseline: all 1517 frames, keyframe_subsample=4
+tune_baseline_full:
+  Config: config_camcalib.yaml
+  NumRuns: 1
+  Parameters: {verbose: 1, mode: 'mono'}
+  Module: oneslam-dev
