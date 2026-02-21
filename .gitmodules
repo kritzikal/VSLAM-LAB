@@ -1,0 +1,6 @@
+[submodule "Baselines/OneSLAM-DEV"]
+	path = Baselines/OneSLAM-DEV
+	url = https://github.com/arcadelab/OneSLAM.git
+[submodule "Baselines/SAGE-SLAM-DEV"]
+	path = Baselines/SAGE-SLAM-DEV
+	url = https://github.com/lppllppl920/SAGE-SLAM.git
